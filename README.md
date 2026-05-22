@@ -24,3 +24,27 @@ mkdocs serve
 ### Publishing
 
 GitHub Actions publishes the site to GitHub Pages automatically on every commit to `main`.
+
+## Web UI (Initial Implementation)
+
+An initial local-first web UI is available for GeoPackage polygon and attribute editing.
+
+### Install app dependencies
+
+```powershell
+pip install -r requirements-webui.txt
+```
+
+### Run the app
+
+```powershell
+uvicorn app.main:app --reload
+```
+
+Open `http://127.0.0.1:8000` in your browser.
+
+### Environment variables
+
+- `FIELDOBS_DATA_DIR`: data directory containing `.gpkg` files (default: `./data`)
+- `FIELDOBS_BACKUP_DIR`: backup output directory (default: `./data/backups`)
+- `FIELDOBS_DEFAULT_LAYER`: optional preferred layer name
