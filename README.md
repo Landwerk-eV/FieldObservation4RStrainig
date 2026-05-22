@@ -2,6 +2,12 @@
 
 Preparation of field observation imagery and analysis into databases for training remote-sensing classification workflows, with an initial focus on grassland characterisation.
 
+## License and Citation
+
+This repository and its data are licensed under **CC0 1.0 Universal**.
+
+While the data is CC0, we kindly request that users cite our repository and organisation Landwerk-eV.
+
 ## Documentation
 
 The repository includes a MkDocs-based documentation site built from the source presentation in [docs/Grassland Types&Practice FieldObservation_v05.jul2024.pptx](docs/Grassland%20Types%26Practice%20FieldObservation_v05.jul2024.pptx).

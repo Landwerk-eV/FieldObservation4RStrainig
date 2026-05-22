@@ -4,6 +4,12 @@ This documentation turns the presentation _Grassland Types&Practice FieldObserva
 
 The current focus is grassland characterisation for training and validation of satellite-based classification workflows, especially for Sentinel-1 and Sentinel-2 imagery.
 
+## License and Citation
+
+This project data is released under **CC0 1.0 Universal**.
+
+While the data is CC0, we kindly request that users cite our associated Data Paper/Repository.
+
 ## Why this documentation exists
 
 The repository currently serves two connected goals:
