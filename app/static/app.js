@@ -25,6 +25,8 @@ let historyStack = [];
 let redoStack = [];
 let activityEvents = [];
 let localFeatureCounter = 0;
+let baselineSnapshot = "";
+let isDirty = false;
 
 const rasterLayer = new ol.layer.Tile({
   source: new ol.source.XYZ({
@@ -85,6 +87,20 @@ selectInteraction.on("select", (event) => {
 
 function setStatus(msg) {
   statusText.textContent = msg;
+}
+
+function updateDirtyIndicator() {
+  document.title = `${isDirty ? "* " : ""}Field Observation Editor`;
+}
+
+function refreshDirtyState() {
+  if (!baselineSnapshot) {
+    isDirty = false;
+    updateDirtyIndicator();
+    return;
+  }
+  isDirty = pendingSplit !== null || snapshotCurrentFeatures() !== baselineSnapshot;
+  updateDirtyIndicator();
 }
 
 function nowTime() {
@@ -207,6 +223,8 @@ function initHistory() {
   historyStack = [];
   redoStack = [];
   pushHistory();
+  baselineSnapshot = historyStack.length > 0 ? historyStack[0] : "";
+  refreshDirtyState();
 }
 
 function commitAttributeChange(field, value) {
@@ -215,6 +233,7 @@ function commitAttributeChange(field, value) {
   }
   selectedFeature.set(field, value);
   pushHistory();
+  refreshDirtyState();
   logAction(`Updated attribute '${field}' on ${featureLabel(selectedFeature)}`);
   setStatus(`Attribute '${field}' updated`);
 }
@@ -242,6 +261,7 @@ function renderAttributes() {
     input.value = selectedFeature.get(field) || "";
     input.addEventListener("input", (event) => {
       selectedFeature.set(field, event.target.value);
+      refreshDirtyState();
       setStatus("Unsaved changes");
     });
     input.addEventListener("change", (event) => {
@@ -349,6 +369,8 @@ async function saveFeatures() {
     body: JSON.stringify(payload)
   });
 
+  baselineSnapshot = snapshotCurrentFeatures();
+  refreshDirtyState();
   logAction(`Saved ${result.feature_count} features`);
   setStatus(`Saved ${result.feature_count} features`);
 }
@@ -397,6 +419,7 @@ drawSplitLineInteraction.on("drawend", async (event) => {
     });
 
     pendingSplit = { preSnapshot };
+    refreshDirtyState();
     confirmSplitBtn.classList.remove("hidden");
     cancelSplitBtn.classList.remove("hidden");
     selectInteraction.getFeatures().clear();
@@ -410,6 +433,14 @@ drawSplitLineInteraction.on("drawend", async (event) => {
 });
 
 loadBtn.addEventListener("click", async () => {
+  if (isDirty) {
+    const proceed = confirm(
+      "You have unsaved changes. Loading a dataset will discard current in-memory edits. Continue?"
+    );
+    if (!proceed) {
+      return;
+    }
+  }
   try {
     await loadFeatures();
   } catch (err) {
@@ -437,6 +468,7 @@ undoBtn.addEventListener("click", () => {
   confirmSplitBtn.classList.add("hidden");
   cancelSplitBtn.classList.add("hidden");
   restoreSnapshot(previous, "Undo applied");
+  refreshDirtyState();
   logAction("Undo");
 });
 
@@ -451,6 +483,7 @@ redoBtn.addEventListener("click", () => {
   confirmSplitBtn.classList.add("hidden");
   cancelSplitBtn.classList.add("hidden");
   restoreSnapshot(snapshot, "Redo applied");
+  refreshDirtyState();
   logAction("Redo");
 });
 
@@ -487,6 +520,7 @@ confirmSplitBtn.addEventListener("click", () => {
   confirmSplitBtn.classList.add("hidden");
   cancelSplitBtn.classList.add("hidden");
   pushHistory();
+  refreshDirtyState();
   logAction(`Split confirmed (${previewCount} resulting part(s))`);
   setStatus("Split confirmed");
 });
@@ -499,6 +533,7 @@ cancelSplitBtn.addEventListener("click", () => {
   pendingSplit = null;
   confirmSplitBtn.classList.add("hidden");
   cancelSplitBtn.classList.add("hidden");
+  refreshDirtyState();
   logAction("Split canceled");
 });
 
@@ -534,6 +569,7 @@ mergeBtn.addEventListener("click", async () => {
     selectedFeature = null;
     renderAttributes();
     pushHistory();
+    refreshDirtyState();
     const labels = selected.map((feature) => featureLabel(feature)).join(", ");
     logAction(`Merged ${selected.length} polygons (${labels})`);
     setStatus("Merged selected polygons");
@@ -550,6 +586,7 @@ deleteBtn.addEventListener("click", () => {
   renderAttributes();
   if (selected.length > 0) {
     pushHistory();
+    refreshDirtyState();
     const labels = selected.map((feature) => featureLabel(feature)).join(", ");
     logAction(`Deleted ${selected.length} polygon(s) (${labels})`);
     setStatus("Deleted selected polygon(s)");
@@ -558,18 +595,24 @@ deleteBtn.addEventListener("click", () => {
 
 drawPolygonInteraction.on("drawend", (event) => {
   pushHistory();
+  refreshDirtyState();
   logAction(`Drew polygon (${featureLabel(event.feature)})`);
 });
 
 modifyInteraction.on("modifyend", (event) => {
   pushHistory();
+  refreshDirtyState();
   const labels = event.features.getArray().map((feature) => featureLabel(feature)).join(", ");
   logAction(`Modified polygon geometry (${labels})`);
 });
 
-vectorSource.on("addfeature", () => setStatus("Unsaved changes"));
-vectorSource.on("changefeature", () => setStatus("Unsaved changes"));
-vectorSource.on("removefeature", () => setStatus("Unsaved changes"));
+window.addEventListener("beforeunload", (event) => {
+  if (!isDirty) {
+    return;
+  }
+  event.preventDefault();
+  event.returnValue = "";
+});
 
 (async function init() {
   try {
