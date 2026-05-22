@@ -3,25 +3,10 @@ site_description: Documentation for grassland field observations and training da
 site_url: https://landwerk-ev.github.io/FieldObservation4RStrainig/
 repo_url: https://github.com/Landwerk-eV/FieldObservation4RStrainig
 repo_name: FieldObservation4RStrainig on GitHub
-use_directory_urls: false
+use_directory_urls: true
 
 theme:
-  name: material
-  icon:
-    logo: material/map-marker-path
-  palette:
-    - scheme: default
-      primary: green
-      accent: lime
-    - scheme: slate
-      primary: green
-      accent: lime
-  features:
-    - content.code.copy
-    - navigation.tabs
-    - navigation.tabs.sticky
-    - navigation.sections
-    - toc.integrate
+  name: shadcn
 
 plugins:
   - search
