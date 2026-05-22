@@ -1,6 +1,7 @@
 # FieldObservation4RStraining
 
 Preparation of field observation imagery and analysis into databases for training remote-sensing classification workflows, with an initial focus on grassland characterisation.
+Thorsten Schad, Landwerk eV, 2026
 
 ## License and Citation
 
@@ -10,7 +11,7 @@ While the data is CC0, we kindly request that users cite our repository and orga
 
 ## Documentation
 
-The repository includes a MkDocs-based documentation site built from the source presentation in [docs/Grassland Types&Practice FieldObservation_v05.jul2024.pptx](docs/Grassland%20Types%26Practice%20FieldObservation_v05.jul2024.pptx).
+The repository includes a MkDocs-based documentation site built from the source presentation in [docs/Grassland Types&Management FieldObservation - v06.may2026.pptx](docs/Grassland%20Types%26Management%20FieldObservation%20-%20v06.may2026.pptx).
 
 ### Local preview
 

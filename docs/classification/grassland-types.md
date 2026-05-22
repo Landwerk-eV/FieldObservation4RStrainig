@@ -4,32 +4,36 @@
 
 Grassland type tags describe the dominant management practice or structural category observed for a patch. The slides identify the following initial tag set in version `v0.2.jul2024`.
 
-## Core grassland classes
+## Grassland Characterisation: Types (slide 8)
 
-| Tag | Meaning | Notes from the presentation |
+| Tag | Type & Management | Example |
 | --- | --- | --- |
-| `#hayfield` | Meadow with traditional two-cut management | Typical hay meadow or `Wiese` |
-| `#sillage` | Meadow with more than two cuts and intensive fertilisation | Silage-oriented management |
-| `#pasture_dairy` | Pasture with clear cattle use | Dairy or cattle pasture |
-| `#pasture_horses` | Pasture with clear horse use | Horse pasture |
-| `#pasture_sheep` | Pasture with clear sheep use | Sheep pasture |
-| `#pasture_unspecified` | Pasture with visible pasture signs but unspecified animal type | Use when animal category is not known |
-| `#mixed_pasture_sillage` | Mixed grazing and silage use | Based on repeated or known mixed use |
-| `#mixed_pasture_hayfield` | Mixed grazing and hayfield use | Based on repeated or known mixed use |
-| `#orchard_meadow` | Orchard meadow or pasture | `Streuobstwiese` or `-weide` |
-| `#mixed_grassland_arable` | Patch alternating between grassland and arable use | Often with maize in rotation |
-| `#grassland_natural` | Almost unmanaged semi-natural grassland | Very low or no management |
-| `#grassland_wetland` | Wet grassland | `Feuchtwiese` |
-| `#grassland_setAside` | Managed grassland currently not managed for a period | Often one late-season cut |
+| `#hayfield` | Meadow (`Wiese`, `Heuwiese`) with traditional 2x cut (`Mad`) | `Wiese vorm' Haus` |
+| `#sillage` | Meadow with >2 cuts (typically >=4 cuts) and intense fertilisation. Harvest to make sillage balls or by using a shredder (`Hächsler`) plus transport. | `Sillage Wiese Bern` |
+| `#pasture_dairy` | Pasture with obvious cattle use (`Weide_Milchvieh` / cattle) | `Wiese Landwirt Hauptstrasse` |
+| `#pasture_horses` | Pasture with obvious horse use |  |
+| `#pasture_sheep` | Pasture with obvious sheep use |  |
+| `#pasture_unspecified` | Pasture with unknown specific use but clear visual signs of pasture |  |
+| `#mixed_pasture_sillage` | Known mixed use by animal grazing and cutting (for example from repeated observations) |  |
+| `#mixed_pasture_hayfield` | Known mixed use by animal grazing and cutting (for example from repeated observations) |  |
+| `#orchard_meadow` | `Streuobstwiese` oder `-weide` |  |
+| `#mixed_grassland_arable` | Grassland in change with arable crop, often maize | `Patches between Neuenhof and woods` |
+| `#grassland_natural` | Obviously (almost) unmanaged (semi-)natural grassland | `Sengbach upstream grassland areas` |
+| `#grassland_wetland` | `Feuchtwiese` | `Wiesen bei Teichen in Wetterfeld` |
+| `#grassland_setAside` | Actually used and managed grassland, yet currently or seasonally not managed. Typically one cut at the end of summer. | `Some grassland patches in the area in 2024` |
+
+This table is the direct operational reference for assigning persistent grassland type labels. In practice, tags should encode the dominant management identity of the polygon, while short-lived management actions are added separately as events.
 
 ## Related crop classes
 
-The presentation also lists adjacent land-use tags for arable reference patches:
+The presentation also lists adjacent land-use crop tags (slide 9):
 
-- `#maize`
-- `#cereals`
-- `#potatoes`
-- `#beet`
+| Tag | Type & Management | Example |
+| --- | --- | --- |
+| `#maize` |  |  |
+| `#cereals` |  |  |
+| `#potatoes` |  |  |
+| `#beet` |  |  |
 
 These are useful where training data spans both grassland and neighbouring agricultural classes.
 

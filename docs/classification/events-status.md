@@ -4,15 +4,17 @@
 
 The presentation defines events as activities happening at the time of observation or shortly beforehand. They represent transient evidence rather than the long-term identity of a patch.
 
-| Tag | Meaning |
-| --- | --- |
-| `#cutting` | Grassland has just been cut, or was cut in the preceding days |
-| `#fertilisation` | Fertiliser was recently applied |
-| `#grazing_cows` | Cows are grazing at the time of the image |
-| `#grazing_horses` | Horses are grazing at the time of the image |
-| `#grazing_sheeps` | Sheep are grazing at the time of the image |
-| `#sillage_production` | Mechanical activity linked to silage production is visible |
-| `#arable_harvest` | Mechanical crop harvest activity is visible |
+| Tag | Event | Example |
+| --- | --- | --- |
+| `#cutting` | Grassland in the image has just being cut (or about the days before) |  |
+| `#fertilisation` | Grassland in the image has just being fertilized (or about the days before) | `Gülle- oder Mineraldünger-Ausbringung` |
+| `#grazing_cows` | Cows (cattle) grazing at the time of the image |  |
+| `#grazing_horses` | Horses grazing at the time of the image |  |
+| `#grazing_sheeps` | Sheep grazing at the time of the image |  |
+| `#sillage_production` | (Mechanical) farming activities at the time of the image showing sillage production | `Sillage balls pressing or its preparation` |
+| `#arable_harvest` | (Mechanical) farming activities at the time of the image showing harvesting | `Mähdreschen, Mais häckseln` |
+
+The event table from slide 10 should be interpreted as a short-term activity layer. Event tags can coexist with persistent type tags on the same geometry and are especially relevant for time-series training labels.
 
 ## Status tags
 

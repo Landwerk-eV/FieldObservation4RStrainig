@@ -4,13 +4,15 @@
 
 The slides define a five-step management intensity scale.
 
-| Tag | Meaning | Typical interpretation |
+| Tag | Type & Management | Example |
 | --- | --- | --- |
-| `i0` | no management | set-aside or natural grassland |
-| `i1` | extensive use | low or no fertilisation, very low cutting or grazing intensity |
-| `i2` | conventional management | typical agricultural practice such as hay meadow or moderate pasture |
-| `i3` | intense | silage meadow with 3 to 4 cuts, or heavily used pasture |
-| `i4` | maximum intensity | more than 4 cuts with strong fertilisation, or near-stable high-pressure pasture |
+| `i0` | no management | set-aside, natural |
+| `i1` | extensive use, low/no fertilisation | sheep grazing twice a year, one cut in late season |
+| `i2` | conventional management as typical agricultural practice | dairy cows/cattle (horse) pasture, where animals are 2x grazing, sometimes with a cut before, in between or in late season; hay meadow |
+| `i3` | intense | sillage meadow, 3-4 cuts per year, moderate fertilisation; pasture near stable with animals almost every day present and grazing |
+| `i4` | max intense | sillage meadow, >4 cuts per year, intense fertilisation after each cut using slurry and mineral fertilizer; pasture near stable with animals every day present and grazing; low density vegetation with many bare soil areas |
+
+This slide-12 table is used to classify management pressure, not grassland type identity. The examples help separate conventional meadow and pasture use (`i2`) from intensive or maximum-intensive regimes (`i3` to `i4`).
 
 The presentation also links use intensity to cutting frequency, with a simple example classification:
 
@@ -22,12 +24,14 @@ The presentation also links use intensity to cutting frequency, with a simple ex
 
 The certainty tag records how strongly the evaluator trusts the classification.
 
-| Tag | Meaning |
-| --- | --- |
-| `c50` | low certainty |
-| `c75` | moderate certainty |
-| `c90` | very certain |
-| `c99` | highly certain |
+| Tag | Certainty level | Example note |
+| --- | --- | --- |
+| `c50` | low certainty | significant uncertainty, for example due to partial land-use change |
+| `c75` | moderate certainty | use when not highly certain |
+| `c90` | very certain | should be the typical level |
+| `c99` | highly certain | use when almost 100% certain |
+
+The certainty table from slide 12 encodes interpretation confidence independent from type or event semantics. It allows later model training and validation steps to filter or weight observations by confidence level.
 
 ## Usage guidance
 
