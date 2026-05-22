@@ -24,6 +24,7 @@ let pendingSplit = null;
 let historyStack = [];
 let redoStack = [];
 let activityEvents = [];
+let localFeatureCounter = 0;
 
 const rasterLayer = new ol.layer.Tile({
   source: new ol.source.XYZ({
@@ -121,6 +122,41 @@ function logAction(message) {
   renderActivityLog();
 }
 
+function featureLabel(feature) {
+  if (!feature) {
+    return "feature:unknown";
+  }
+  const id = feature.getId?.();
+  if (id !== undefined && id !== null && `${id}`.length > 0) {
+    return `feature:${id}`;
+  }
+
+  const candidates = [
+    feature.get("id"),
+    feature.get("fid"),
+    feature.get("ID"),
+    feature.get("FID"),
+    feature.get("OBJECTID"),
+    feature.get("objectid")
+  ];
+  const value = candidates.find((item) => item !== undefined && item !== null && `${item}`.length > 0);
+  if (value !== undefined) {
+    return `feature:${value}`;
+  }
+
+  const localLabel = feature.get("__localLabel");
+  if (localLabel) {
+    return localLabel;
+  }
+
+  localFeatureCounter += 1;
+  const generated = `feature:local-${localFeatureCounter}`;
+  feature.set("__localLabel", generated, true);
+  return generated;
+
+  return "feature:unknown";
+}
+
 async function fetchJson(url, options = {}) {
   const response = await fetch(url, options);
   if (!response.ok) {
@@ -179,7 +215,7 @@ function commitAttributeChange(field, value) {
   }
   selectedFeature.set(field, value);
   pushHistory();
-  logAction(`Updated attribute '${field}'`);
+  logAction(`Updated attribute '${field}' on ${featureLabel(selectedFeature)}`);
   setStatus(`Attribute '${field}' updated`);
 }
 
@@ -366,7 +402,7 @@ drawSplitLineInteraction.on("drawend", async (event) => {
     selectInteraction.getFeatures().clear();
     selectedFeature = null;
     renderAttributes();
-    logAction(`Split preview created (${newFeatures.length} parts)`);
+    logAction(`Split preview created for ${featureLabel(selected[0])} (${newFeatures.length} parts)`);
     setStatus(`Split preview ready (${newFeatures.length} parts). Confirm or cancel.`);
   } catch (err) {
     setStatus(err.message);
@@ -441,6 +477,7 @@ confirmSplitBtn.addEventListener("click", () => {
   if (!pendingSplit) {
     return;
   }
+  const previewCount = vectorSource.getFeatures().filter((feature) => feature.get("__splitPreview")).length;
   vectorSource.getFeatures().forEach((feature) => {
     if (feature.get("__splitPreview")) {
       feature.unset("__splitPreview", true);
@@ -450,7 +487,7 @@ confirmSplitBtn.addEventListener("click", () => {
   confirmSplitBtn.classList.add("hidden");
   cancelSplitBtn.classList.add("hidden");
   pushHistory();
-  logAction("Split confirmed");
+  logAction(`Split confirmed (${previewCount} resulting part(s))`);
   setStatus("Split confirmed");
 });
 
@@ -497,7 +534,8 @@ mergeBtn.addEventListener("click", async () => {
     selectedFeature = null;
     renderAttributes();
     pushHistory();
-    logAction(`Merged ${selected.length} polygons`);
+    const labels = selected.map((feature) => featureLabel(feature)).join(", ");
+    logAction(`Merged ${selected.length} polygons (${labels})`);
     setStatus("Merged selected polygons");
   } catch (err) {
     setStatus(err.message);
@@ -512,19 +550,21 @@ deleteBtn.addEventListener("click", () => {
   renderAttributes();
   if (selected.length > 0) {
     pushHistory();
-    logAction(`Deleted ${selected.length} polygon(s)`);
+    const labels = selected.map((feature) => featureLabel(feature)).join(", ");
+    logAction(`Deleted ${selected.length} polygon(s) (${labels})`);
     setStatus("Deleted selected polygon(s)");
   }
 });
 
-drawPolygonInteraction.on("drawend", () => {
+drawPolygonInteraction.on("drawend", (event) => {
   pushHistory();
-  logAction("Drew polygon");
+  logAction(`Drew polygon (${featureLabel(event.feature)})`);
 });
 
-modifyInteraction.on("modifyend", () => {
+modifyInteraction.on("modifyend", (event) => {
   pushHistory();
-  logAction("Modified polygon geometry");
+  const labels = event.features.getArray().map((feature) => featureLabel(feature)).join(", ");
+  logAction(`Modified polygon geometry (${labels})`);
 });
 
 vectorSource.on("addfeature", () => setStatus("Unsaved changes"));
