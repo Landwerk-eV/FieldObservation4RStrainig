@@ -1,4 +1,4 @@
-# FieldObservation4RStrainig
+# FieldObservation4RStraining
 
 Preparation of field observation imagery and analysis into databases for training remote-sensing classification workflows, with an initial focus on grassland characterisation.
 
