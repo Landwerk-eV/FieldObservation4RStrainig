@@ -36,4 +36,7 @@ nav:
       - Intensity and Certainty: classification/intensity-certainty.md
   - Data Publication:
       - Data Lifecycle and Publishing: publishing/index.md
+      - Dataset Comparison Draft (v2 vs v16jul2023): publishing/dataset-comparison-v2-v16jul2023.md
+      - Dataset Differences Table (v2 vs v16jul2023): publishing/dataset-differences-table-v2-v16jul2023.md
+      - Geometry Delta Table (v2 vs v16jul2023): publishing/geometry-delta-table-v2-v16jul2023.md
       - Source Presentation: source-presentation.md
