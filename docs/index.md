@@ -1,8 +1,14 @@
 # Field Observation for Remote Sensing Training
 
-This documentation turns the presentation _Grassland Types&Practice FieldObservation v05.jul2024_ into a first structured reference for field observations that support remote-sensing model training.
+This documentation turns the presentation _Grassland Types&Management FieldObservation v06.may2026_ into a first structured reference for field observations that support remote-sensing model training.
 
 The current focus is grassland characterisation for training and validation of satellite-based classification workflows, especially for Sentinel-1 and Sentinel-2 imagery.
+
+## License and Citation
+
+This project data is released under **CC0 1.0 Universal**.
+
+While the data is CC0, we kindly request that users cite our associated Data Paper/Repository.
 
 ## Why this documentation exists
 
@@ -32,4 +38,10 @@ The first version covers the core ideas from the source presentation:
 
 ## Source material
 
-The source presentation is retained in this repository at [docs/Grassland Types&Practice FieldObservation_v05.jul2024.pptx](Grassland%20Types%26Practice%20FieldObservation_v05.jul2024.pptx).
+The source presentation is retained in this repository at [docs/Grassland Types&Management FieldObservation - v06.may2026.pptx](Grassland%20Types%26Management%20FieldObservation%20-%20v06.may2026.pptx).
+
+The current markdown pages were reviewed against slides 1 to 20 of that file, with explicit reference tables integrated for:
+
+- grassland type and management tags (slide 8)
+- events (slide 10)
+- intensity and certainty classes (slide 12)

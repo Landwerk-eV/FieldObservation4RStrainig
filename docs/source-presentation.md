@@ -2,9 +2,9 @@
 
 ## Primary source
 
-The initial documentation in this repository is based on the presentation file:
+The current documentation baseline in this repository is based on the presentation file:
 
-- [Grassland Types&Practice FieldObservation_v05.jul2024.pptx](Grassland%20Types%26Practice%20FieldObservation_v05.jul2024.pptx)
+- [Grassland Types&Management FieldObservation - v06.may2026.pptx](Grassland%20Types%26Management%20FieldObservation%20-%20v06.may2026.pptx)
 
 ## What was extracted for the first documentation version
 
@@ -16,6 +16,12 @@ The first MkDocs version uses the presentation as the source for:
 - event and status tags
 - intensity and certainty classes
 - the compact observation notation
+
+## Review scope for current update
+
+This update reviewed the content against slides 1 to 20 of the v06.may2026 presentation.
+
+The tables from slides 8, 10, and 12 are now explicitly reproduced and briefly interpreted in the corresponding classification pages.
 
 ## Editorial treatment
 

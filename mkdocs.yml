@@ -3,25 +3,10 @@ site_description: Documentation for grassland field observations and training da
 site_url: https://landwerk-ev.github.io/FieldObservation4RStrainig/
 repo_url: https://github.com/Landwerk-eV/FieldObservation4RStrainig
 repo_name: FieldObservation4RStrainig on GitHub
-use_directory_urls: false
+use_directory_urls: true
 
 theme:
-  name: material
-  icon:
-    logo: material/map-marker-path
-  palette:
-    - scheme: default
-      primary: green
-      accent: lime
-    - scheme: slate
-      primary: green
-      accent: lime
-  features:
-    - content.code.copy
-    - navigation.tabs
-    - navigation.tabs.sticky
-    - navigation.sections
-    - toc.integrate
+  name: shadcn
 
 plugins:
   - search
@@ -51,4 +36,7 @@ nav:
       - Intensity and Certainty: classification/intensity-certainty.md
   - Data Publication:
       - Data Lifecycle and Publishing: publishing/index.md
+      - Dataset Comparison Draft (v2 vs v16jul2023): publishing/dataset-comparison-v2-v16jul2023.md
+      - Dataset Differences Table (v2 vs v16jul2023): publishing/dataset-differences-table-v2-v16jul2023.md
+      - Geometry Delta Table (v2 vs v16jul2023): publishing/geometry-delta-table-v2-v16jul2023.md
       - Source Presentation: source-presentation.md

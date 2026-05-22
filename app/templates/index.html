@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Field Observation Editor</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v10.6.1/ol.css" />
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <h1>Field Observation Polygon Editor</h1>
+      <div class="dataset-picker">
+        <label for="datasetSelect">GeoPackage</label>
+        <select id="datasetSelect"></select>
+        <button id="loadBtn">Load</button>
+        <button id="saveBtn" class="accent">Save</button>
+      </div>
+    </header>
+
+    <main class="layout">
+      <section class="map-panel">
+        <div id="map"></div>
+        <div class="tools">
+          <button id="undoBtn">Undo</button>
+          <button id="redoBtn">Redo</button>
+          <button id="drawBtn">Draw Polygon</button>
+          <button id="modifyBtn">Modify</button>
+          <button id="splitBtn">Split Selected</button>
+          <button id="confirmSplitBtn" class="hidden">Confirm Split</button>
+          <button id="cancelSplitBtn" class="hidden">Cancel Split</button>
+          <button id="mergeBtn">Merge Selected</button>
+          <button id="deleteBtn">Delete Selected</button>
+          <span id="statusText">Idle</span>
+        </div>
+      </section>
+
+      <aside class="side-panel">
+        <h2>Attributes</h2>
+        <p class="muted">Edit curated fields for the selected polygon.</p>
+        <form id="attrForm"></form>
+        <hr />
+        <h3>Details</h3>
+        <pre id="metaInfo"></pre>
+        <hr />
+        <h3>Session Activity</h3>
+        <ul id="activityLog" class="activity-log"></ul>
+      </aside>
+    </main>
+
+    <footer class="footer">
+      <span>Data folder: {{ data_dir }}</span>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/ol@v10.6.1/dist/ol.js"></script>
+    <script src="/static/app.js"></script>
+  </body>
+</html>
