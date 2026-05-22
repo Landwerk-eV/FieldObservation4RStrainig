@@ -29,8 +29,8 @@ Documentation is part of the data product. A public, versioned documentation sit
 
 This repository now includes:
 
-- a Material for MkDocs site
+- a MkDocs site
 - a GitHub Actions workflow that builds and deploys the site on commits to `main`
-- versionable markdown pages derived from the July 2024 presentation
+- versionable markdown pages derived from the v06.may2026 presentation
 
 That gives the project an initial publication layer even before the full cloud-service vision is implemented.
