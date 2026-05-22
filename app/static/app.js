@@ -252,12 +252,15 @@ function renderAttributes() {
 
   editableFields.forEach((field) => {
     const wrapper = document.createElement("div");
+    wrapper.className = "attr-field";
     const label = document.createElement("label");
     label.setAttribute("for", `field-${field}`);
     label.textContent = field;
 
-    const input = document.createElement("input");
+    const input = document.createElement("textarea");
     input.id = `field-${field}`;
+    input.className = "attr-textarea";
+    input.rows = 4;
     input.value = selectedFeature.get(field) || "";
     input.addEventListener("input", (event) => {
       selectedFeature.set(field, event.target.value);
