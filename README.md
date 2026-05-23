@@ -68,3 +68,5 @@ Recommended layout:
 5. Keep the app to one worker/process because GeoPackage writes are guarded by a process-local lock.
 
 Deployment notes and a sample nginx config are stored in [dev/IONOS_DEPLOYMENT.md](dev/IONOS_DEPLOYMENT.md) and [dev/nginx/fieldobs.conf](dev/nginx/fieldobs.conf).
+
+The repository root also includes [dev/.env.example](dev/.env.example) for the Docker Compose variables.
